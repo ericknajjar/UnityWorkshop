@@ -22,11 +22,6 @@ public class Bootstrap : MonoBehaviour {
 
         m_context = factory.CreateContext();
 
-        //var up = UniRx.Observable.EveryUpdate().Where((u)=> Input.GetKeyDown(KeyCode.KeypadPlus)).Select((u)=> true);
-        //var down = UniRx.Observable.EveryUpdate().Where((u) => Input.GetKeyDown(KeyCode.KeypadMinus)).Select((u) => false);
-
-       // m_context.Get<Turret>();
-
         m_context.Get<Turret>(InnerBindingNames.Empty,Vector2.zero);
     }
 

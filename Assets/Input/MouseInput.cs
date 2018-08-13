@@ -17,7 +17,7 @@ public class MouseInput : IGameplayInput
 
     public IObservable<Unit> Fire{
         get {
-            return Observable.EveryUpdate().Where((_) => Input.GetButtonDown("Fire 1")).Select((_) => Unit.Default);
+            return Observable.EveryUpdate().Where((_) => Input.GetButtonDown("Fire1")).Select((_) => Unit.Default);
         }
     }
 

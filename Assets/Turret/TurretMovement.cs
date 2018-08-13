@@ -1,22 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
-public class TurretMovement : MonoBehaviour {
+public class TurretMovement : EntityComponent {
 
     [SerializeField]
-    float m_movementSpeed;
+    float m_movementSpeed = 0;
 
     Transform m_transform;
 
 	void Start () {
+        
         m_transform = transform;
+        var input = Entity.Context.Get<IGameplayInput>();
+
+        input.Movement.Subscribe((movement) => {
+            Vector2 translation = movement * Time.deltaTime * Vector2.right * m_movementSpeed;
+            m_transform.Translate(translation);
+        });
 	}
 
-	void Update () {
-
-        Vector2 translation = Input.GetAxis("Mouse X") * Time.deltaTime * Vector2.right * m_movementSpeed;
-        m_transform.Translate(translation);
-
-	}
 }

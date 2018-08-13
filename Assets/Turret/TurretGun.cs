@@ -1,23 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
-public class TurretGun : MonoBehaviour {
+public class TurretGun : EntityComponent {
 
     [SerializeField]
     Bullet m_bulletPrefab;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
+		    
+        var input = Entity.Context.Get<IGameplayInput>();
 
-	void Update () {
-        
-        if(Input.GetButtonDown("Fire1"))
-        {
+        input.Fire.Subscribe((Unit) => {
             GameObject.Instantiate(m_bulletPrefab.gameObject, transform.position, Quaternion.identity);
-        }
+        });
 	}
+
+
 }
