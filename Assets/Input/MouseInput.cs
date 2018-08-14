@@ -7,17 +7,17 @@ using UniRx;
 [HasBindings]
 public class MouseInput : IGameplayInput
 {
-    public IObservable<float> Movement
+    public float Movement
     {
         get
         {
-            return Observable.EveryUpdate().Select((_) => Input.GetAxis("Mouse X")).Where(_ => Mathf.Abs(_) > 0.0f);
+            return Input.GetAxis("Mouse X");
         }
     }
 
-    public IObservable<Unit> Fire{
+    public bool Fire {
         get {
-            return Observable.EveryUpdate().Where((_) => Input.GetButtonDown("Fire 1")).Select((_) => Unit.Default);
+            return Input.GetButtonDown("Fire1");
         }
     }
 

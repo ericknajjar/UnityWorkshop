@@ -4,36 +4,30 @@ using EasyInject.Engine.Runtime;
 using System;
 using UniRx;
 
-[HasBindings]
+
 public class TouchInput : IGameplayInput
 {
-    private TouchInput()
-    {
-
-    }
-
-    public IObservable<float> Movement
+    public float Movement
     {
         get
         {
-            throw new NotImplementedException();
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+                // Get movement of the finger since last frame
+                Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+                return Mathf.Clamp(touchDeltaPosition.x,-1.0f,1.0f);
+            }
+
+            return 0.0f;
         }
     }
 
-    public IObservable<Unit> Fire
+    public bool Fire
     {
-
         get
         {
-            throw new NotImplementedException();
+            return Input.touchCount > 1 && Input.GetTouch(1).phase == TouchPhase.Began;
+       
         }
     }
-
-    #if ( !UNITY_EDITOR && (UNITY_IPHONE || UNITY_ANDROID))
-    [BindingProvider(Singleton =true)]
-    private static IGameplayInput GetInput()
-    {
-        return new TouchInput();
-    }
-    #endif
 }
