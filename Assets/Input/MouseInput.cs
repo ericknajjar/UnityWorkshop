@@ -4,7 +4,6 @@ using EasyInject.Engine.Runtime;
 using System;
 using UniRx;
 
-[HasBindings]
 public class MouseInput : IGameplayInput
 {
     public float Movement
@@ -21,11 +20,4 @@ public class MouseInput : IGameplayInput
         }
     }
 
-    #if (UNITY_EDITOR || UNITY_STANDALONE)
-    [BindingProvider(Singleton =true)]
-    private static IGameplayInput GetInput()
-    {
-        return new MouseInput();
-    }
-    #endif
 }
