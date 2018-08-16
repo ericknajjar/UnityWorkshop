@@ -11,16 +11,8 @@ public class TurretMovement : MonoBehaviour {
     Transform m_transform;
 
 	void Start () {
-        m_transform = transform;
-
-        #if (!UNITY_EDITOR && (UNITY_IPHONE || UNITY_ANDROID))
-                        m_input = new TouchInput();
-        #endif
-
-        #if (UNITY_EDITOR || UNITY_STANDALONE)
-                m_input = new MouseInput();
-
-        #endif
+        m_transform = transform; 
+        m_input = InputSingleton.GetInstance();
 	}
 
 	void Update () {

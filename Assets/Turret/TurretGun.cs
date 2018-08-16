@@ -12,14 +12,7 @@ public class TurretGun : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        #if (!UNITY_EDITOR && (UNITY_IPHONE || UNITY_ANDROID))
-                m_input = new TouchInput();
-        #endif
-
-        #if (UNITY_EDITOR || UNITY_STANDALONE)
-        m_input = new MouseInput();
-
-        #endif
+        m_input = InputSingleton.GetInstance();
     }
 	
 
