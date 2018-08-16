@@ -4,13 +4,19 @@ using EasyInject.Engine.Runtime;
 using System;
 using UniRx;
 
+#if (UNITY_EDITOR || UNITY_STANDALONE)
+[HasBindings]
 public class MouseInput : IGameplayInput
 {
+    private MouseInput(){
+        
+    }
+
     public float Movement
     {
         get
         {
-            return Input.GetAxis("Mouse X");
+            return Mathf.Clamp(Input.GetAxis("Mouse X"), -1,1);
         }
     }
 
@@ -20,4 +26,11 @@ public class MouseInput : IGameplayInput
         }
     }
 
+    [BindingProvider(Singleton = true)]
+    private static IGameplayInput Create(){
+        return new MouseInput();
+    }
+              
 }
+
+#endif

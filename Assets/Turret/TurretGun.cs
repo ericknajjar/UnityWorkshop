@@ -7,14 +7,7 @@ public class TurretGun : MonoBehaviour {
     [SerializeField]
     Bullet m_bulletPrefab;
 
-    IGameplayInput m_input;
-
-    // Use this for initialization
-    void Start()
-    {
-        m_input = InputSingleton.GetInstance();
-    }
-	
+    public IGameplayInput m_input;
 
 	void Update () {
         

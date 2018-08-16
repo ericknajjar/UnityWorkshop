@@ -6,13 +6,13 @@ public class TurretMovement : MonoBehaviour {
 
     [SerializeField]
     float m_movementSpeed;
-    IGameplayInput m_input;
+
+    public IGameplayInput m_input;
 
     Transform m_transform;
 
 	void Start () {
         m_transform = transform; 
-        m_input = InputSingleton.GetInstance();
 	}
 
 	void Update () {

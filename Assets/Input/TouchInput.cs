@@ -4,9 +4,15 @@ using EasyInject.Engine.Runtime;
 using System;
 using UniRx;
 
+#if (!UNITY_EDITOR && (UNITY_IPHONE || UNITY_ANDROID))
 
+[HasBindings]
 public class TouchInput : IGameplayInput
 {
+    private TouchInput(){
+        
+    }
+
     public float Movement
     {
         get
@@ -30,4 +36,10 @@ public class TouchInput : IGameplayInput
        
         }
     }
+
+    [BindingProvider(Singleton = true)]
+    private static IGameplayInput Create(){
+        return new TouchInput();
+    }
 }
+#endif
