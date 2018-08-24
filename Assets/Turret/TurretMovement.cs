@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretMovement : MonoBehaviour {
+public class TurretMovement : EntityComponent {
 
     [SerializeField]
     float m_movementSpeed;
 
-    public IGameplayInput m_input;
+    IGameplayInput m_input;
 
     Transform m_transform;
 
 	void Start () {
         m_transform = transform; 
+        m_input = Entity.Context.Get<IGameplayInput>();
 	}
 
 	void Update () {

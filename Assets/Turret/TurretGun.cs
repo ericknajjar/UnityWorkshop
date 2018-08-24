@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretGun : MonoBehaviour {
+public class TurretGun : EntityComponent {
 
     [SerializeField]
     Bullet m_bulletPrefab;
 
-    public IGameplayInput m_input;
+    IGameplayInput m_input;
+
+	private void Start()
+	{
+        m_input = Entity.Context.Get<IGameplayInput>();
+	}
 
 	void Update () {
         

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using EasyInject.Engine.Runtime;
+using EasyInject.IOC.extensions;
 using UnityEngine;
 using UniRx;
 
 [HasBindings]
-public class Turret : MonoBehaviour {
+public class Turret : EntityComponent {
 
 
     [BindingProvider(DependencyCount = 1)]
@@ -14,10 +15,11 @@ public class Turret : MonoBehaviour {
 
         var go = GameObject.Instantiate(prefab.gameObject, pos, Quaternion.identity);
 
-        go.GetComponent<TurretGun>().m_input = input;
-        go.GetComponent<TurretMovement>().m_input = input;
+        var turret = go.GetComponent<Turret>();
 
-        return go.GetComponent<Turret>();
+        turret.Entity.Context.Bind<IGameplayInput>().To(input);
+
+        return turret;
     }
 
 }
